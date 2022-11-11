@@ -1,0 +1,19 @@
+{
+    "name": "nabin/mswm",
+    "description": "My Shop Woocommerce Modifications",
+    "type": "project",
+    "license": "GPL2",
+    "autoload": {
+        "psr-4": {
+            "Nabin\\Mswm\\": "includes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "nabeen90",
+            "email": "nabin.adhikari@codemanas.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
