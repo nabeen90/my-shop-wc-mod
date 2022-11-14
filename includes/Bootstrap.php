@@ -85,6 +85,7 @@ final class Bootstrap {
 		}
 
 		Modification::getInstance();
+		Order::getInstance();
 	}
 }
 
