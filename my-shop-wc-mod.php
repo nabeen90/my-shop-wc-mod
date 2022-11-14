@@ -44,3 +44,5 @@ if ( ! defined( 'MSWM_ROOT_URI_PATH' ) ) {
 if ( ! defined( 'MSWM_BASE_FILE' ) ) {
 	define( 'MSWM_BASE_FILE', plugin_basename( __FILE__ ) );
 }
+
+require_once MSWM_ROOT_DIR_PATH . '/includes/Bootstrap.php';
