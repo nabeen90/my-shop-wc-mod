@@ -15,9 +15,9 @@ class Order {
 		add_action( 'woocommerce_checkout_create_order', [ $this, 'save_dropout_location' ], 10, 2 );
 
 		add_action( 'woocommerce_admin_order_data_after_order_details', [ $this, 'display_dropout_data_in_admin' ] );
-		add_action( 'woocommerce_process_shop_order_meta', [ $this, 'save_dropout_loaction_data' ], 45, 2 );
+		add_action( 'woocommerce_process_shop_order_meta', [ $this, 'save_dropout_location_data' ], 45, 2 );
 
-		add_filter( 'woocommerce_email_order_meta_fields', [ $this, 'email_dropout_location_data' ], 30, 3 );
+		add_filter( 'woocommerce_email_customer_details', [ $this, 'email_dropout_location_data' ], 30, 3 );
 
 	}
 
@@ -42,7 +42,6 @@ class Order {
 		}
 	}
 
-
 	function display_dropout_data_in_admin( $order ) { ?>
         <div class="order_data_column">
 
@@ -63,20 +62,18 @@ class Order {
         </div>
 	<?php }
 
-	function save_dropout_loaction_data( $order_id, $post ) {
+	function save_dropout_location_data( $order_id, $post ) {
 		$order = wc_get_order( $order_id );
 		$order->update_meta_data( '_dropout_location', wc_clean( $_POST['_dropout_location'] ) );
 		$order->save_meta_data();
 	}
 
-	function email_dropout_location_data( $fields, $sent_to_admin, $order ) {
-		$fields['_dropout_location'] = array(
-			'label' => __( 'Dropout Location' ),
-			'value' => $order->get_meta( '_dropout_location' ),
-//			'value' => get_post_meta( $order->id, '_dropout_location', true ),
-		);
-
-		return $fields;
+	function email_dropout_location_data( $order, $sent_to_admin, $plain_text ) {
+		$dropout_loc = $order->get_meta( '_dropout_location' );
+		?>
+        <div class="dropout">
+            <p>Dropout Location is <span style="font-size: 14px; font-weight: bold;"><?php echo $dropout_loc; ?></span></p>
+        </div>
+		<?php
 	}
-
 }
