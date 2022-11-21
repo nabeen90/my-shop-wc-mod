@@ -1,6 +1,10 @@
 <?php
 
 namespace Nabin\Mswm;
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Modification {
 	public static ?Modification $instance = null;
